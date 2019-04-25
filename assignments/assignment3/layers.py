@@ -25,7 +25,7 @@ def softmax_with_cross_entropy(predictions, target_index):
     including the gradient
 
     Arguments:
-      predictions, np array, shape is either (N) or (N, batch_size) -
+      predictions, np array, shape is either (N) or (batch_size, N) -
         classifier output
       target_index: np array of int, shape is (1) or (batch_size) -
         index of the true class for given sample(s)
@@ -114,15 +114,19 @@ class ConvolutionalLayer:
 
     def forward(self, X):
         batch_size, height, width, channels = X.shape
-        # TODO: Implement forward pass for convolution layers
 
         out_height = 0
         out_width = 0
         
+        # TODO: Implement forward pass
+        # Hint: setup variables that hold the result
+        # and one x/y location at a time in the loop below
+        
         # It's ok to use loops for going over width and height
         # but try to avoid having any other loops
-        for y in range(out_width):
-            for x in range(out_height):
+        for y in range(out_height):
+            for x in range(out_width):
+                # TODO: Implement forward pass for specific location
                 pass
         raise Exception("Not implemented!")
 
@@ -137,10 +141,16 @@ class ConvolutionalLayer:
         _, out_height, out_width, out_channels = d_out.shape
 
         # TODO: Implement backward pass
-        # Try to avoid having any other loops here too
+        # Same as forward, setup variables of the right shape that
+        # aggregate input gradient and fill them for every location
+        # of the output
         
-        for y in range(out_width):
-            for x in range(out_height):
+        # Try to avoid having any other loops here too        
+        for y in range(out_height):
+            for x in range(out_width):
+                # TODO: Implement backward pass for specific location
+                # Aggregate gradients for both the input and
+                # the parameters (W and B)
                 pass
             
         raise Exception("Not implemented!")
@@ -163,15 +173,14 @@ class MaxPoolingLayer:
         self.X = None
 
     def forward(self, X):
-        # TODO: Implement maxpool forward pass
-        # Again, ok to use for loops for x-y dimensions, but
-        # not for anything else
         batch_size, height, width, channels = X.shape
+        # TODO: Implement maxpool forward pass
+        # Hint: Similarly to Conv layer, loop on
+        # output x/y dimension
         raise Exception("Not implemented!")
 
     def backward(self, d_out):
         # TODO: Implement maxpool backward pass
-        
         batch_size, height, width, channels = self.X.shape
         raise Exception("Not implemented!")
 
